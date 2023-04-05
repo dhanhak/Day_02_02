@@ -37,7 +37,7 @@ public class InsertMessage extends HttpServlet {
 		System.out.println("작성자 : " + writer + " " + "메세지 : " + message);
 
 
-		DAO dao = new DAO();
+		DAO dao = DAO.getInstance();
 		try {
 			int result = dao.Insert(new DTO(0, writer, message));
 			if(result == 1) {

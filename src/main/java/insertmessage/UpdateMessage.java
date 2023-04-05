@@ -19,7 +19,7 @@ public class UpdateMessage extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAO dao = new DAO();
+		DAO dao = DAO.getInstance();
 		
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");

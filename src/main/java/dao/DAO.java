@@ -8,20 +8,43 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import org.apache.catalina.connector.Response;
 
 import dto.DTO;
 
 public class DAO {
-	private Connection getConntection() throws Exception {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		String url ="jdbc:oracle:thin:@localhost:1521:xe";
-		String id = "kh";
-		String pw = "th";
-
-		Connection con = DriverManager.getConnection(url,id,pw);
-		return con;
+	
+	// Singleton Design Pattern : 클래스에 대하여 인스턴스를 1개 이상 생성하지 못하게 통제하는 패턴
+	
+	private static DAO instance = null;
+	
+	public synchronized static DAO getInstance() {		//synchronized 쓰레드로부터 안전하다.
+		if(instance == null) {
+			instance = new DAO();
+		}
+		return instance;
 	}
+	
+//	private BasicDataSource bds = new BasicDataSource();
+//	private DAO() {
+//		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+//		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+//		bds.setUsername("kh");
+//		bds.setPassword("th");
+//		bds.setInitialSize(5);
+//	}
+	
+	private Connection getConntection() throws Exception {
+		Context iCtx = new InitialContext();	
+		DataSource ds = (DataSource)iCtx.lookup("java:/comp/env/jdbc/ora");
+		
+		return ds.getConnection();
+	}
+	
 
 	public int Insert(DTO dto) throws Exception {
 		String sql = "INSERT INTO MESSAGES VALUES(MESSAGES_seq.nextval,?,?)";

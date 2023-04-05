@@ -18,7 +18,7 @@ import dto.DTO;
 public class SelectMessage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAO dao = new DAO();
+		DAO dao = DAO.getInstance();
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
 		try {
