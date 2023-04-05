@@ -29,15 +29,6 @@ public class DAO {
 		return instance;
 	}
 	
-//	private BasicDataSource bds = new BasicDataSource();
-//	private DAO() {
-//		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-//		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-//		bds.setUsername("kh");
-//		bds.setPassword("th");
-//		bds.setInitialSize(5);
-//	}
-	
 	private Connection getConntection() throws Exception {
 		Context iCtx = new InitialContext();	
 		DataSource ds = (DataSource)iCtx.lookup("java:/comp/env/jdbc/ora");

@@ -45,7 +45,11 @@ public class InsertMessage extends HttpServlet {
 			} else {
 				System.out.println("인서트 실패");
 			}
-			response.sendRedirect("SelectMessage");
+//			response.sendRedirect("SelectMessage");
+			request.getRequestDispatcher("insertView.jsp").forward(request, response);
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("연결 실패");
